@@ -11,6 +11,17 @@ class DirectorsController < ApplicationController
     render json: director
   end
 
+  def index
+    directors = Director.all
+    render json: directors, include: ['movies', 'movies.reviews']
+  end
+
+  def show
+    director = Director.find(params[:id])
+    render json: director, include: ['movies', 'movies.reviews']
+  end
+
+
   private
 
   def render_not_found_response
